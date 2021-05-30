@@ -2,21 +2,35 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://D1294906482.Github.io</id>
     <title>Gridea</title>
-    <updated>2021-03-10T04:01:10.121Z</updated>
+    <updated>2021-05-30T05:53:33.607Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://D1294906482.Github.io"/>
     <link rel="self" href="https://D1294906482.Github.io/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
+    <subtitle>空间换时间，汗水换丰年</subtitle>
     <logo>https://D1294906482.Github.io/images/avatar.png</logo>
     <icon>https://D1294906482.Github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
     <entry>
-        <title type="html"><![CDATA[阿萨德]]></title>
-        <id>https://D1294906482.Github.io/post/a-sa-de/</id>
-        <link href="https://D1294906482.Github.io/post/a-sa-de/">
+        <title type="html"><![CDATA[算法杂谈]]></title>
+        <id>https://D1294906482.Github.io/post/suan-fa-za-tan/</id>
+        <link href="https://D1294906482.Github.io/post/suan-fa-za-tan/">
         </link>
-        <updated>2021-03-10T02:52:33.000Z</updated>
-        <content type="html"><![CDATA[<p>阿萨德 阿萨德</p>
+        <updated>2021-03-14T16:12:13.000Z</updated>
+        <content type="html"><![CDATA[<p>前几天写算法题的时候，遇到几道类似的题目，遂自己总结一番。<br>
+<img src="https://D1294906482.Github.io/post-images/1615740423181.png" alt="" loading="lazy"><br>
+题目如上所示，需要将字符串的字符按照频率降序排列，看完这道题之后，我第一时间想的就是哈希表<br>
+①建立一个map,将每个元素存入map，键值对应元素，值对应次数；<br>
+②创建一个vector&lt;pair&lt;int,int&gt;&gt;的遍历map，将每个map值存入数组；<br>
+③对vector数组进行排序，按照pair中的second值大小从大到小进行排序；<br>
+④从头遍历vector数组，将每个pair中的first值放入新建的string当中，并返回string为答案；<br>
+具体代码如下<br>
+<img src="https://D1294906482.Github.io/post-images/1615742229318.jpg" alt="" loading="lazy"><br>
+PS:代码参考了https://leetcode-cn.com/problems/sort-characters-by-frequency/solution/451-gen-ju-zi-fu-chu-xian-pin-lu-pai-xu-san-chong-/；<br>
+时间复杂度为：对大小为N字符串遍历一次为O(N),对大小为N的map遍历一次为O(N)，对大小为N的vector遍历两次为O(N)，对大小为N的vector排序为O(NlogN)，总复杂度为O(NlogN)；<br>
+空间复杂度：创建了一个大小为N的map和一个大小为N的vector，总的复杂度为O(N)；<br>
+由上可以得知，遍历太多次，影响速度，故需要寻找一个更好的算法，在浏览答案的过程中发现了桶排序算法<br>
+二.桶排序算法<br>
+桶排序算法</p>
 ]]></content>
     </entry>
     <entry>
