@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://D1294906482.Github.io</id>
     <title>Gridea</title>
-    <updated>2021-05-30T09:47:06.649Z</updated>
+    <updated>2021-05-30T11:50:45.228Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://D1294906482.Github.io"/>
     <link rel="self" href="https://D1294906482.Github.io/atom.xml"/>
@@ -11,7 +11,7 @@
     <icon>https://D1294906482.Github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
     <entry>
-        <title type="html"><![CDATA[C++杂谈-迭代器问题]]></title>
+        <title type="html"><![CDATA[C++杂谈-类返回和传递问题]]></title>
         <id>https://D1294906482.Github.io/post/cza-tan-die-dai-qi-wen-ti/</id>
         <link href="https://D1294906482.Github.io/post/cza-tan-die-dai-qi-wen-ti/">
         </link>
@@ -23,7 +23,33 @@
 ①string为负数，即第一位为‘-’的情况，此时为了让数值最大，在string中寻找大于插入数x的第一个数，将其插入在那个数之前。<br>
 ②string为正数，即第一位不为‘-’的情况，此时为了让数值最大，在string中寻找小于插入数x的第一个数，将其插入在那个数之前。<br>
 所以为了完成这道题需要的知识有：<br>
-①string类insert的用法：<img src="https://D1294906482.Github.io/post-images/1622367989944.jpg" alt="" loading="lazy"></p>
+①string类insert的用法：<img src="https://D1294906482.Github.io/post-images/1622367989944.jpg" alt="" loading="lazy"><br>
+<img src="https://D1294906482.Github.io/post-images/1622368176195.png" alt="" loading="lazy"><br>
+②知道0-9的阿斯克码：分别是‘0’-48，‘9’-57；<br>
+所以我第一时间写出了我的代码：<br>
+<img src="https://D1294906482.Github.io/post-images/1622368662833.jpg" alt="" loading="lazy"><br>
+结果一运行，显示stack-buffer-overflow。我看了一眼代码，决定对其进行检查，我先是检查position1和position2，发现基本没什么错误，那可能是返回值赋值到i出问题了。<br>
+我先将position两个函数去掉，将其代码放入主函数中。如下图所示：<br>
+<img src="https://D1294906482.Github.io/post-images/1622370156906.jpg" alt="" loading="lazy"><br>
+发现过了，那就是&quot;return i&quot;这一步出现问题了。我们都知道在c++中，迭代器就是一个类，这也就引申出今天博客的问题：类返回和传递问题。<br>
+二.类返回和传递问题<br>
+2.1问题分析<br>
+前面代码我们可以看出，在函数position1中，迭代器i指向了string n，return i之后按理来说没问题。而恰巧就是这里发生了问题：<br>
+①position1(int x,string n)这里对x的传递是按值传递，故在传递过程中隐式调用了类赋值函数，创造了一个n的副本，而此时i就成为了这个n的副本的迭代器。<br>
+②当i返回的时候，此时position1函数执行完成，对副本n自动进行析构，此时i指向的就是一个已经被释放空间的函数！所以在主函数中，迭代器i对应的就不是原string n而是已经释放的string n的副本。故在调用insert函数的时候，会出错。<br>
+2.2问题解决<br>
+①因为按值传递会隐式调用类赋值函数，所以可以将position1(int x,string n)改position1(int x,string &amp;n)，这样子position1函数中的迭代器i指向的就是主函数中的string n 而不是string n的副本。<br>
+②或者像我今天解决的方法一样，去掉position1和position2函数，直接在主函数里面写代码，这样子就不会有类传递这一过程。<br>
+三.总结<br>
+①函数传递有三种形式：值传递、指针传递、引用传递。<br>
+值传递：<br>
+形参是实参的拷贝，改变形参的值并不会影响外部实参的值。从被调用函数的角度来说，值传递是单向的（实参-&gt;形参），参数的值只能传入，不能传出。当函数内部需要修改参数，并且不希望这个改变影响调用者时，采用值传递。而类在值传递过程中会隐式调用类赋值函数，从而在函数中使用的是类的副本。<br>
+指针传递：<br>
+形参为指向实参地址的指针，当对形参的指向操作时，就相当于对实参本身进行的操作。<br>
+引用传递：<br>
+形参相当于是实参的“别名”，对形参的操作其实就是对实参的操作，在引用传递过程中，被调函数的形式参数虽然也作为局部变量在栈中开辟了内存空间，但是这时存放的是由主调函数放进来的实参变量的地址。被调函数对形参的任何操作都被处理成间接寻址，即通过栈中存放的地址访问主调函数中的实参变量。正因为如此，被调函数对形参做的任何操作都影响了主调函数中的实参变量。类类型尽量用引用传递，这样也可以减小系统内存的花销。<br>
+②C++的内容糅杂，需要对每一步的运行了如指掌，这样子才不易出错。<br>
+-----------------------------------------2021年5月30日---------------------</p>
 ]]></content>
     </entry>
     <entry>
