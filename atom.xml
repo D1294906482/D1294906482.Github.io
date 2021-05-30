@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://D1294906482.Github.io</id>
     <title>Gridea</title>
-    <updated>2021-05-30T05:53:33.607Z</updated>
+    <updated>2021-05-30T09:46:40.984Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://D1294906482.Github.io"/>
     <link rel="self" href="https://D1294906482.Github.io/atom.xml"/>
@@ -10,6 +10,22 @@
     <logo>https://D1294906482.Github.io/images/avatar.png</logo>
     <icon>https://D1294906482.Github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[C++杂谈-迭代器问题]]></title>
+        <id>https://D1294906482.Github.io/post/cza-tan-die-dai-qi-wen-ti/</id>
+        <link href="https://D1294906482.Github.io/post/cza-tan-die-dai-qi-wen-ti/">
+        </link>
+        <updated>2021-05-30T05:55:05.000Z</updated>
+        <content type="html"><![CDATA[<p>----------------------------------只有知识不会辜负你-----------------------------<br>
+一.事件起因。<br>
+2021年5月30日的周赛中，有道题目是这么描述的<img src="https://D1294906482.Github.io/post-images/1622363067957.jpg" alt="" loading="lazy"><br>
+当做到这道题的时候，马上有思路了：<br>
+①string为负数，即第一位为‘-’的情况，此时为了让数值最大，在string中寻找大于插入数x的第一个数，将其插入在那个数之前。<br>
+②string为正数，即第一位不为‘-’的情况，此时为了让数值最大，在string中寻找小于插入数x的第一个数，将其插入在那个数之前。<br>
+所以为了完成这道题需要的知识有：<br>
+①string类insert的用法：<img src="https://D1294906482.Github.io/post-images/1622367989944.jpg" alt="" loading="lazy"></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[算法杂谈]]></title>
         <id>https://D1294906482.Github.io/post/suan-fa-za-tan/</id>
